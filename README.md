@@ -13,6 +13,13 @@ la mazmorra.
 
 ## Instalación
 
+Instala las dependencias de Raylib
+
+```sh
+sudo apt install build-essential git
+sudo apt install libasound2-dev libx11-dev libxrandr-dev libxi-dev libgl1-mesa-dev libglu1-mesa-dev libxcursor-dev libxinerama-dev libwayland-dev libxkbcommon-dev
+```
+
 Clona el repositorio
 
 ```sh

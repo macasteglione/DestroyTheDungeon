@@ -21,8 +21,10 @@ private:
 
 public:
     GameCamera();
-    ~GameCamera();
-    Camera *GetCamera();
+    ~GameCamera() = default;
+    const Camera *GetCamera() const;
+
+    void Update(int mode = CAMERA_FIRST_PERSON);
 };
 
 #endif // !GAMECAMERA_H

@@ -12,10 +12,8 @@
 #ifndef SETTINGS_H
 #define SETTINGS_H
 
-#define SCREEN_W 800
-#define SCREEN_H 600
+#define SCREEN_W 1440
+#define SCREEN_H 900
 #define MAX_FPS 60
-
-#define MAX_COLUMNS 20
 
 #endif // !SETTINGS_H
