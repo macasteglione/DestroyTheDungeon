@@ -1,6 +1,7 @@
 // Local includes
 #include "Utils.h"
 #include "Settings.h"
+#include "GameCamera.h"
 
 // C++ binaries
 #include "stdlib.h"
@@ -11,15 +12,7 @@ int main(void)
 {
     InitWindow(SCREEN_W, SCREEN_H, "Destroy The Dungeon");
 
-    // Define the camera to look into our 3d world (position, target, up vector)
-    Camera camera = {0};
-    camera.position = (Vector3){0.0f, 2.0f, 4.0f}; // Camera position
-    camera.target = (Vector3){0.0f, 2.0f, 0.0f};   // Camera looking at point
-    camera.up = (Vector3){0.0f, 1.0f, 0.0f};       // Camera up vector (rotation towards target)
-    camera.fovy = 60.0f;                           // Camera field-of-view Y
-    camera.projection = CAMERA_PERSPECTIVE;        // Camera projection type
-
-    int cameraMode = CAMERA_FIRST_PERSON;
+    GameCamera *camera = new GameCamera();
 
     // Generates some random columns
     float heights[MAX_COLUMNS] = {0};
@@ -41,13 +34,13 @@ int main(void)
         // Update camera computes movement internally depending on the camera mode
         // Some default standard keyboard/mouse inputs are hardcoded to simplify use
         // For advanced camera controls, it's recommended to compute camera movement manually
-        UpdateCamera(&camera, cameraMode);
+        UpdateCamera(camera->GetCamera(), CAMERA_FIRST_PERSON);
 
         BeginDrawing();
         {
             ClearBackground(RAYWHITE);
 
-            BeginMode3D(camera);
+            BeginMode3D(*camera->GetCamera());
             {
                 DrawPlane((Vector3){0.0f, 0.0f, 0.0f}, (Vector2){32.0f, 32.0f}, LIGHTGRAY); // Draw ground
                 DrawCube((Vector3){-16.0f, 2.5f, 0.0f}, 1.0f, 5.0f, 32.0f, BLUE);           // Draw a blue wall
