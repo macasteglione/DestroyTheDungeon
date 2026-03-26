@@ -1,5 +1,5 @@
 /**
- * @file GameCamera.h
+ * @file Player.h
  * @author macasteglione
  * @brief First-person camera with jump, head bob, idle sway and tilt
  * @version 0.2
@@ -7,14 +7,15 @@
  *
  * @copyright Copyright (c) 2026
  */
-#ifndef GAMECAMERA_H
-#define GAMECAMERA_H
+
+#ifndef PLAYER_H
+#define PLAYER_H
 
 #include "raylib.h"
 #include "raymath.h"
 #include <cmath>
 
-class GameCamera
+class Player
 {
 private:
     Camera camera;
@@ -33,16 +34,16 @@ private:
     float springStiffness = 180.f; // rigidez — velocidad de recuperación
     float springDamping = 14.f;    // amortiguación — suprime el rebote
 
-    // Head bob (movimiento)
+    // Head bob
     float bobTimer = 0.f;
     float bobAmplitude = 0.02f; // altura máxima del ciclo
     float bobFrequency = 10.f;  // velocidad del ciclo
     float bobOffset = 0.f;      // offset Y actual
     float bobVelocity = 0.f;    // velocidad del spring del bob
 
-    // Idle sway (respiración en reposo)
+    // Idle sway
     float idleTimer = 0.f;
-    float idleAmplitudeY = 0.006f; // amplitud vertical (sutil)
+    float idleAmplitudeY = 0.006f; // amplitud vertical
     float idleFrequency = 1.2f;    // frecuencia de respiración
 
     // Tilt
@@ -58,14 +59,14 @@ private:
     void ApplyTilt(float delta);
 
 public:
-    GameCamera();
-    ~GameCamera() = default;
+    Player();
+    ~Player() = default;
 
-    GameCamera(const GameCamera &) = delete;
-    GameCamera &operator=(const GameCamera &) = delete;
+    Player(const Player &) = delete;
+    Player &operator=(const Player &) = delete;
 
     const Camera *GetCamera() const;
     void Update(float delta, int mode = CAMERA_FIRST_PERSON);
 };
 
-#endif // !GAMECAMERA_H
+#endif // !PLAYER_H

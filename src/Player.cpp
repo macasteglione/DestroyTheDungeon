@@ -1,6 +1,6 @@
-#include "GameCamera.h"
+#include "Player.h"
 
-GameCamera::GameCamera()
+Player::Player()
     : camera{
           .position = {0.f, 2.f, 4.f},
           .target = {0.f, 2.f, 0.f},
@@ -10,12 +10,12 @@ GameCamera::GameCamera()
 {
 }
 
-const Camera *GameCamera::GetCamera() const
+const Camera *Player::GetCamera() const
 {
     return &camera;
 }
 
-void GameCamera::Update(float delta, int mode)
+void Player::Update(float delta, int mode)
 {
     // Raylib gestiona movimiento XZ y rotación por mouse
     UpdateCamera(&camera, mode);
@@ -35,7 +35,7 @@ void GameCamera::Update(float delta, int mode)
     lastOffsetY = totalOffsetY;
 }
 
-void GameCamera::ApplyJump(float delta)
+void Player::ApplyJump(float delta)
 {
     if (isGrounded && IsKeyPressed(KEY_SPACE))
     {
@@ -63,7 +63,7 @@ void GameCamera::ApplyJump(float delta)
     landingOffset += landingVelocity * delta;
 }
 
-void GameCamera::ApplyBob(float delta, bool isMoving)
+void Player::ApplyBob(float delta, bool isMoving)
 {
     float bobTarget = 0.f;
 
@@ -87,9 +87,9 @@ void GameCamera::ApplyBob(float delta, bool isMoving)
     bobOffset += bobVelocity * delta;
 }
 
-void GameCamera::ApplyTilt(float delta)
+void Player::ApplyTilt(float delta)
 {
-    // Inclinar la cámara al moverse lateralmente (estilo Quake)
+    // Inclinar la cámara al moverse lateralmente
     float targetTilt = 0.f;
     if (IsKeyDown(KEY_A))
         targetTilt = tiltMax;
